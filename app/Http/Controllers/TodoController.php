@@ -19,7 +19,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Auth::user()->todos()->with('category')->latest()->get();
+        $todos = Auth::user()->todos()->with('category')->latest()->paginate(10);
         $categories = Auth::user()->categories;
         return view('todos.index', compact('todos', 'categories'));
     }
@@ -101,4 +101,16 @@ class TodoController extends Controller
         return redirect()->route('todos.index')
             ->with('success', 'Todo deleted successfully.');
     }
+
+    /**
+     * Toggle the completion status of the specified todo.
+     */
+    public function toggle(Todo $todo)
+{
+    $todo->update([
+        'is_completed' => !$todo->is_completed
+    ]);
+    
+    return redirect()->back()->with('success', 'Todo updated successfully');
+}
 }

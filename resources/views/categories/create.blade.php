@@ -1,45 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Create New Category</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('categories.store') }}">
-                        @csrf
-
-                        <div class="form-group row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Category Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" 
-                                    class="form-control @error('name') is-invalid @enderror" 
-                                    name="name" value="{{ old('name') }}" 
-                                    required autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Create Category
-                                </button>
-                                <a href="{{ route('categories.index') }}" class="btn btn-secondary">
-                                    Cancel
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+<div class="py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="p-6 bg-white border-b border-gray-200">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Create New Category</h2>
+                    <a href="{{ route('categories.index') }}" class="text-sm text-indigo-600 hover:text-indigo-900">
+                        ← Back to Categories
+                    </a>
                 </div>
+
+                <form method="POST" action="{{ route('categories.store') }}" class="space-y-6">
+                    @csrf
+
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">
+                            Category Name
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mt-1 relative rounded-md shadow-sm">
+                            <input id="name" 
+                                   name="name" 
+                                   type="text"
+                                   value="{{ old('name') }}"
+                                   required
+                                   autofocus
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm @error('name') border-red-300 text-red-900 placeholder-red-300 focus:border-red-500 focus:outline-none focus:ring-red-500 @enderror"
+                                   placeholder="e.g. Work, Personal, Shopping">
+                        </div>
+                        @error('name')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-2 text-sm text-gray-500">
+                            Give your category a clear and descriptive name.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-4 pt-6 border-t border-gray-100">
+                        <a href="{{ route('categories.index') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Cancel
+                        </a>
+                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Create Category
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

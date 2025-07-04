@@ -11,13 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -28,7 +27,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -45,13 +44,23 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function todos(): HasMany
-    {
-        return $this->hasMany(Todo::class);
-    }
-
+    /**
+     * Get the categories for the user.
+     *
+     * @return HasMany
+     */
     public function categories(): HasMany
     {
         return $this->hasMany(Category::class);
+    }
+
+    /**
+     * Get the todos for the user.
+     *
+     * @return HasMany
+     */
+    public function todos(): HasMany
+    {
+        return $this->hasMany(Todo::class);
     }
 }
