@@ -20,13 +20,11 @@ class CategorySeeder extends Seeder
             'Education'
         ];
 
-        foreach ($users as $user) {
-            foreach ($categories as $categoryName) {
-                Category::create([
-                    'name' => $categoryName,
-                    'user_id' => $user->id
-                ]);
-            }
+        foreach ($categories as $categoryName) {
+            Category::create([
+                'name' => $categoryName,
+                'user_id' => $users->id
+            ]);
         }
     }
 }

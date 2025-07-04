@@ -42,6 +42,7 @@ class TodoController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'nullable|exists:categories,id,user_id,' . Auth::id(),
+            'due_date' => 'nullable|date',
             'is_completed' => 'boolean',
         ]);
 
@@ -81,6 +82,7 @@ class TodoController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'category_id' => 'nullable|exists:categories,id,user_id,' . Auth::id(),
+            'due_date' => 'nullable|date',
             'is_completed' => 'boolean',
         ]);
 
@@ -106,11 +108,11 @@ class TodoController extends Controller
      * Toggle the completion status of the specified todo.
      */
     public function toggle(Todo $todo)
-{
-    $todo->update([
-        'is_completed' => !$todo->is_completed
-    ]);
-    
-    return redirect()->back()->with('success', 'Todo updated successfully');
-}
+    {
+        $todo->update([
+            'is_completed' => !$todo->is_completed
+        ]);
+        
+        return redirect()->back()->with('success', 'Todo updated successfully');
+    }
 }

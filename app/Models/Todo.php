@@ -15,10 +15,12 @@ class Todo extends Model
         'is_completed',
         'user_id',
         'category_id',
+        'due_date',
     ];
 
     protected $casts = [
         'is_completed' => 'boolean',
+        'due_date' => 'date',
     ];
 
     public function user(): BelongsTo

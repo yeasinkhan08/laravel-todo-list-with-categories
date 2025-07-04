@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
         // satic user
         User::create([
             'name' => 'Yeasin Khan',
-            'email' => 'test@example.com',
-            'password' => 'test',
+            'email' => 'yeasin@example.com',
+            'password' => 'yeasin',
         ]);
        
     }
